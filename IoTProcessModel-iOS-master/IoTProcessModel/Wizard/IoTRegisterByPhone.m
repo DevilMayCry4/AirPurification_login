@@ -50,22 +50,40 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     [self.textPhone becomeFirstResponder];
     
     self.canQueryVerifyCode = NO;
     [self updateViews];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[IoTProcessModel imageWithFileName:@"return_icon"] style:UIBarButtonItemStylePlain target:self action:@selector(onBack)];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap)];
+    [self.view addGestureRecognizer:tap];
+}
+
+- (void)onBack
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)onTap
+{
+    [self.view endEditing:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [XPGWifiSDK sharedInstance].delegate = self;
+    self.navigationItem.title = @"注册·";
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [XPGWifiSDK sharedInstance].delegate = nil;
+     
 }
 
 - (void)viewDidDisappear:(BOOL)animated

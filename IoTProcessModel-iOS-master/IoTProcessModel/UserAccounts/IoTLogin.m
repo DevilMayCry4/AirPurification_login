@@ -248,9 +248,8 @@
 
 - (IBAction)onRegister:(id)sender {
     IoTRegisterByPhone *registerAccount = [[IoTRegisterByPhone alloc] initWithNibName:nil bundle:[IoTProcessModel resourceBundle]];
-    IoTStepFrame *stepFrame = [[IoTStepFrame alloc] initWithRootViewController:registerAccount];
-    stepFrame.steps = [IoTProcessModel generalSteps];
-    [self.navigationController pushViewController:stepFrame animated:YES];
+   
+    [self.navigationController pushViewController:registerAccount animated:YES];
 }
 
 #pragma mark - TextField Delegate
