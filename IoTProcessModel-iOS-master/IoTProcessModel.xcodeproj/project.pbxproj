@@ -22,6 +22,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		C545573F1B9C82DF004BACD7 /* bt_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = C545573E1B9C82DF004BACD7 /* bt_bg.png */; };
+		C54557401B9C82DF004BACD7 /* bt_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = C545573E1B9C82DF004BACD7 /* bt_bg.png */; };
 		EE16C9A61A1EF4850009FB4E /* IoTProcessModel.h in Copy Files */ = {isa = PBXBuildFile; fileRef = EE16C9A51A1EF4850009FB4E /* IoTProcessModel.h */; };
 		EE16C9A81A1EF4850009FB4E /* IoTProcessModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EE16C9A71A1EF4850009FB4E /* IoTProcessModel.m */; };
 		EE16CA651A1F0E3D0009FB4E /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = EE16C9E31A1EF4BE0009FB4E /* MBProgressHUD.m */; };
@@ -36,7 +38,6 @@
 		EE53F4E61A2315F800E8266E /* IoTScanResult.xib in Resources */ = {isa = PBXBuildFile; fileRef = EECD14D31A230A0000C650BD /* IoTScanResult.xib */; };
 		EE53F4E71A2315F800E8266E /* IoTRegisterByPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = EECD15341A23114F00C650BD /* IoTRegisterByPhone.xib */; };
 		EE53F4E81A2315F800E8266E /* IoTRegisterByMail.xib in Resources */ = {isa = PBXBuildFile; fileRef = EECD15391A23116000C650BD /* IoTRegisterByMail.xib */; };
-		EE53F4E91A2315F800E8266E /* IoTLogin.xib in Resources */ = {isa = PBXBuildFile; fileRef = EECD152F1A230FB300C650BD /* IoTLogin.xib */; };
 		EE53F5081A23338E00E8266E /* IoTStepFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = EE53F5061A23338E00E8266E /* IoTStepFrame.m */; };
 		EE53F50A1A23343500E8266E /* IoTStepFrame.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE53F5071A23338E00E8266E /* IoTStepFrame.xib */; };
 		EE53F5151A245E7D00E8266E /* IoTDeviceList.xib in Resources */ = {isa = PBXBuildFile; fileRef = EE53F5131A245E0F00E8266E /* IoTDeviceList.xib */; };
@@ -140,6 +141,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C545573E1B9C82DF004BACD7 /* bt_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bt_bg.png; sourceTree = "<group>"; };
 		EE16C9A21A1EF4850009FB4E /* libIoTProcessModel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIoTProcessModel.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE16C9A51A1EF4850009FB4E /* IoTProcessModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IoTProcessModel.h; sourceTree = "<group>"; };
 		EE16C9A71A1EF4850009FB4E /* IoTProcessModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IoTProcessModel.m; sourceTree = "<group>"; };
@@ -240,7 +242,6 @@
 		EECD15271A230DC700C650BD /* zbar-samples.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zbar-samples.png"; sourceTree = "<group>"; };
 		EECD152D1A230FB300C650BD /* IoTLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IoTLogin.h; sourceTree = "<group>"; };
 		EECD152E1A230FB300C650BD /* IoTLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IoTLogin.m; sourceTree = "<group>"; };
-		EECD152F1A230FB300C650BD /* IoTLogin.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IoTLogin.xib; sourceTree = "<group>"; };
 		EECD15321A23114F00C650BD /* IoTRegisterByPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IoTRegisterByPhone.h; sourceTree = "<group>"; };
 		EECD15331A23114F00C650BD /* IoTRegisterByPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IoTRegisterByPhone.m; sourceTree = "<group>"; };
 		EECD15341A23114F00C650BD /* IoTRegisterByPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IoTRegisterByPhone.xib; sourceTree = "<group>"; };
@@ -354,7 +355,6 @@
 			children = (
 				EECD152D1A230FB300C650BD /* IoTLogin.h */,
 				EECD152E1A230FB300C650BD /* IoTLogin.m */,
-				EECD152F1A230FB300C650BD /* IoTLogin.xib */,
 				EEF45FBC1A2C7080002FE2AA /* IoTForgetPassword.h */,
 				EEF45FBD1A2C7080002FE2AA /* IoTForgetPassword.m */,
 				EEF45FBE1A2C7080002FE2AA /* IoTForgetPassword.xib */,
@@ -525,6 +525,7 @@
 		EE7691861A43F45500B682DD /* 2x */ = {
 			isa = PBXGroup;
 			children = (
+				C545573E1B9C82DF004BACD7 /* bt_bg.png */,
 				EE7691891A43F45500B682DD /* login_button@2x.png */,
 				EE76918A1A43F45500B682DD /* login_icon-06@2x.png */,
 				EE76918B1A43F45500B682DD /* login_icon-07@2x.png */,
@@ -796,6 +797,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C545573F1B9C82DF004BACD7 /* bt_bg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -805,6 +807,7 @@
 			files = (
 				EE7691AD1A43F48A00B682DD /* button_1@2x.png in Resources */,
 				EE7691AE1A43F48A00B682DD /* button_2_1@2x.png in Resources */,
+				C54557401B9C82DF004BACD7 /* bt_bg.png in Resources */,
 				EE7691AF1A43F48A00B682DD /* button_2_2@2x.png in Resources */,
 				EE7691B01A43F48A00B682DD /* button_3@2x.png in Resources */,
 				EE7691B11A43F48A00B682DD /* return_icon@2x.png in Resources */,
@@ -847,7 +850,6 @@
 				EE53F4E61A2315F800E8266E /* IoTScanResult.xib in Resources */,
 				EE53F4E71A2315F800E8266E /* IoTRegisterByPhone.xib in Resources */,
 				EE53F4E81A2315F800E8266E /* IoTRegisterByMail.xib in Resources */,
-				EE53F4E91A2315F800E8266E /* IoTLogin.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

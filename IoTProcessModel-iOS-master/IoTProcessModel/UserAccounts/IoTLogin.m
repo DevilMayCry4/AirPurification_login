@@ -26,12 +26,12 @@
 #import "IoTStepFrame.h"
 #import "IoTRegisterByPhone.h"
 #import "IoTForgetPassword.h"
+#import <CoreText/CoreText.h>
 
 #define ALERT_TAG_USERNAME          1
 #define ALERT_TAG_PASSWORD          2
 
 @interface IoTLogin ()
-
 @property (weak, nonatomic) IBOutlet UITextField *textUser;
 @property (weak, nonatomic) IBOutlet UITextField *textPass;
 
@@ -40,13 +40,74 @@
 @implementation IoTLogin
 
 - (void)viewDidLoad {
-    [super viewDidLoad]; 
+    [super viewDidLoad];
+    self.view.backgroundColor = [UIColor colorWithRed:0.373  green:0.690  blue:0.906 alpha:1];
+    CGFloat width = CGRectGetWidth(self.view.frame);
+    UIImage *image = [[UIImage alloc]initWithContentsOfFile:[[IoTProcessModel resourceBundle] pathForResource:@"logo@2x" ofType:@"png"]];
+    CGSize size = image.size;
+  
+    UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake((width - size.width)/2, 100, size.width, size.height)];
+    logoView.image = image;
+    [self.view addSubview:logoView];
+    
+   
+    CGFloat margin = 36.0;
+    CGFloat fieldHeight = 39;
+    CGRect frame = CGRectZero;
+    frame.origin.x = margin;
+    frame.size.width = width - 2*margin;
+    frame.size.height = fieldHeight;
+    frame.origin.y = CGRectGetMaxY(logoView.frame) + margin;
+     
+    UITextField *filed = [[UITextField alloc] initWithFrame:frame];
+    filed.borderStyle = UITextBorderStyleRoundedRect;
+    filed.attributedPlaceholder = [self placeHolder:@"用户名"];
+    filed.delegate = self;
+    [self.view addSubview:filed];
+    self.textUser = filed;
+ 
+    frame.origin.y = CGRectGetMaxY(frame) + 15;
+    filed = [[UITextField alloc] initWithFrame:frame];
+    filed.attributedPlaceholder = [self placeHolder:@"密码"];
+    filed.secureTextEntry = YES;
+    filed.borderStyle = UITextBorderStyleRoundedRect;
+    filed.delegate = self;
+    [self.view addSubview:filed];
+    self.textPass = filed;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
+    [self.view addGestureRecognizer:tap];
+    
+    image = [[UIImage alloc]initWithContentsOfFile:[[IoTProcessModel resourceBundle] pathForResource:@"bt_bg" ofType:@"png"]];
+    size = image.size;
+    frame.origin.y = CGRectGetMaxY(frame) + 20;
+    frame.size.height = size.height;
+    UIButton *loginButton = [[UIButton alloc] initWithFrame:frame];
+    [loginButton setBackgroundImage:[image stretchableImageWithLeftCapWidth:10 topCapHeight:10] forState:UIControlStateNormal];
+    [loginButton setTitle:@"登陆" forState:UIControlStateNormal];
+    [loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [loginButton addTarget:self action:@selector(onLogin:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:loginButton];
     //只需要执行一次
     if(ProcessModel.isRegisteredUser)
     {
         ProcessModel.hud.labelText = @"自动登录中...";
         [ProcessModel.hud show:YES];
     }
+}
+
+- (NSAttributedString *)placeHolder:(NSString *)string
+{
+    NSMutableParagraphStyle *paragraphStyle = NSMutableParagraphStyle.new;
+    paragraphStyle.alignment                = NSTextAlignmentCenter;
+    
+    NSAttributedString *attributedString   =
+    [NSAttributedString.alloc initWithString:string
+                                  attributes:
+     @{NSParagraphStyleAttributeName:paragraphStyle,NSForegroundColorAttributeName:[UIColor lightGrayColor]}];
+    
+ 
+    
+   return  attributedString;
 }
 
 - (void)didReceiveMemoryWarning {
