@@ -87,12 +87,38 @@
     [loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [loginButton addTarget:self action:@selector(onLogin:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:loginButton];
+    CGFloat buttonWidth = 80;
+    CGFloat buttonHeight = 20;
+    CGFloat padding = 10;
+    CGFloat viewHeight = CGRectGetHeight(self.view.frame);
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(width/2-0.5, viewHeight - buttonHeight - 10, 1, buttonHeight)];
+    lineView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:lineView];
+    
+    UIButton *registerButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(lineView.frame) - buttonWidth - padding , CGRectGetMinY(lineView.frame), buttonWidth, buttonHeight)];
+    [registerButton setAttributedTitle:[self underline:@"注册账号"] forState:UIControlStateNormal];
+    [registerButton addTarget:self action:@selector(onRegister:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:registerButton];
+    
+    UIButton *forgetButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(lineView.frame) +padding , CGRectGetMinY(lineView.frame), buttonWidth, buttonHeight)];
+    [forgetButton setAttributedTitle:[self underline:@"忘记密码"] forState:UIControlStateNormal];
+    [forgetButton addTarget:self action:@selector(onForgetPassword:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:forgetButton];
     //只需要执行一次
     if(ProcessModel.isRegisteredUser)
     {
         ProcessModel.hud.labelText = @"自动登录中...";
         [ProcessModel.hud show:YES];
     }
+}
+
+- (NSAttributedString *)underline:(NSString *)string
+{
+    
+    return [[NSAttributedString alloc] initWithString:string
+                                           attributes:@{
+                                                        NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),
+                                                        NSForegroundColorAttributeName:[UIColor whiteColor]}];
 }
 
 - (NSAttributedString *)placeHolder:(NSString *)string
