@@ -417,12 +417,9 @@
         devices = self.arrayList[1];
 
     IoTScanResult *scanResult = [[IoTScanResult alloc] initWithDevices:devices];
-    IoTStepFrame *stepFrame = [[IoTStepFrame alloc] initWithRootViewController:scanResult];
-        
-    stepFrame.steps = [IoTProcessModel generalSteps];
-    stepFrame.currentStepIndex = 1;
+     
     
-    [self.navigationController pushViewController:stepFrame animated:YES];
+    [self.navigationController pushViewController:scanResult animated:YES];
 }
 
 #pragma mark - Property

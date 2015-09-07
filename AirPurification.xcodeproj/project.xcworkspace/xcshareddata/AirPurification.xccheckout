@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>853A26B8-90CA-47F6-8FA7-7CD00B4F3233</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>AirPurification</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>3FABD95D75FC466D2AE4EFA8ACA9C07AE921C026</key>
 		<string>https://github.com/DevilMayCry4/AirPurification_login.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>AirPurification.xcodeproj/project.xcworkspace</string>
+	<string>AirPurification.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>3FABD95D75FC466D2AE4EFA8ACA9C07AE921C026</key>

@@ -75,7 +75,7 @@
 {
     [super viewWillAppear:animated];
     [XPGWifiSDK sharedInstance].delegate = self;
-    self.navigationItem.title = @"注册·";
+    self.navigationItem.title = @"注册";
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
