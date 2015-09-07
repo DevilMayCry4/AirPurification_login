@@ -58,6 +58,6 @@
     </objects>
     <resources>
         <image name="icon_time.png" width="26" height="26"/>
-        <image name="start.png" width="266" height="266"/>
+        <image name="start.png" width="352" height="352"/>
     </resources>
 </document>
