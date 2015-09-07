@@ -104,6 +104,17 @@
     [forgetButton setAttributedTitle:[self underline:@"忘记密码"] forState:UIControlStateNormal];
     [forgetButton addTarget:self action:@selector(onForgetPassword:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:forgetButton];
+    
+   
+    UIButton *skipButton = [[UIButton alloc] initWithFrame:CGRectMake( width-buttonWidth - 10, 30,buttonWidth, buttonHeight)];
+    [skipButton setImage:[UIImage imageNamed:@"skip_arrow"] forState:UIControlStateNormal];
+    [skipButton setTitle:@"跳过" forState:UIControlStateNormal];
+    [skipButton setImageEdgeInsets:UIEdgeInsetsMake(0, 40, 0, 0)];
+    [skipButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -45, 0, 0)];
+    [skipButton addTarget:self action:@selector(onSkipButtonPress) forControlEvents:UIControlEventTouchUpInside];
+    [skipButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.view addSubview:skipButton];
+    
     //只需要执行一次
     if(ProcessModel.isRegisteredUser)
     {
@@ -187,6 +198,11 @@
 - (void)didBecomeActive {
     [self.textUser resignFirstResponder];
     [self.textPass resignFirstResponder];
+}
+
+- (void)onSkipButtonPress
+{
+    NSLog(@"skip button press");
 }
 
 - (IBAction)onTap:(id)sender {

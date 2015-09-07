@@ -20,6 +20,7 @@
 #import "CircleProgressView.h"
 #import <CoreLocation/CoreLocation.h> 
 #import "UICircularSlider.h"
+#import <ShareSDK/ShareSDK.h>
 
 #define ALERT_TAG_SHUTDOWN          1
 
@@ -59,6 +60,9 @@ static NSString *const kAirInfoString = @"我身边的空气指数：";
     CircleProgressView *_filterProgress;
     UICircularSlider *_circleSlider;
     UIImageView     *_bgImageView;
+    
+    UIButton       *_modeButton;
+    NSInteger       _mode;//模式分智能、手动、睡眠三种模式
 }
 
 
@@ -101,7 +105,7 @@ static NSString *const kAirInfoString = @"我身边的空气指数：";
     [self.view addSubview:_bgImageView];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_menu"] style:UIBarButtonItemStylePlain target:[SlideNavigationController sharedInstance] action:@selector(toggleLeftMenu)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_start"] style:UIBarButtonItemStylePlain target:self action:@selector(onPower)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_start"] style:UIBarButtonItemStylePlain target:self action:@selector(onPower)];
   
     self.airSensitivity = 0;
 
@@ -124,11 +128,24 @@ static NSString *const kAirInfoString = @"我身边的空气指数：";
     
     UIButton *storeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, buttonWidth, bottomViewHeight)];
     [storeButton addTarget:self action:@selector(onStoreButtonPress) forControlEvents:UIControlEventTouchUpInside];
+    [storeButton setTitle:@"商城" forState:UIControlStateNormal];
+    [storeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [storeButton setImage:[UIImage imageNamed:@"shopping_icon"] forState:UIControlStateNormal];
     [bottomView addSubview:storeButton];
     UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(buttonWidth, 0, buttonWidth, bottomViewHeight)];
+    
+    [shareButton setTitle:@"分享" forState:UIControlStateNormal];
+    [shareButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [shareButton setImage:[UIImage imageNamed:@"share_icon"] forState:UIControlStateNormal];
     [shareButton addTarget:self action:@selector(onShareButtonPress) forControlEvents:UIControlEventTouchUpInside];
     [bottomView addSubview:shareButton];
     
+    CGFloat  modeButtonWidth = 120;
+    _modeButton = [[UIButton alloc] initWithFrame:CGRectMake((CGRectGetWidth(self.view.frame) - modeButtonWidth)/2, CGRectGetHeight(self.view.frame) - modeButtonWidth - 55, modeButtonWidth, modeButtonWidth)];
+    [_modeButton setTitleEdgeInsets:UIEdgeInsetsMake(40, 0, 0, 0)];
+    _modeButton.titleLabel.font = [UIFont systemFontOfSize:14];
+    [self.view addSubview:_modeButton];
+    [self setUpModeButton];
     //开启自动定位
     //判断是否开启了位置服务
     self.manager = [[CLLocationManager alloc]init];
@@ -143,11 +160,73 @@ static NSString *const kAirInfoString = @"我身边的空气指数：";
     
 }
 
+- (void)setUpModeButton
+{
+    if (NO == bSwitch)
+    {
+        [_modeButton setBackgroundImage:[UIImage imageNamed:@"purify_bt"] forState:UIControlStateNormal];
+        [_modeButton setTitle:@"开机" forState:UIControlStateNormal];
+    }
+    else
+    {
+        switch (_mode)
+        {
+            case  0:
+                [_modeButton setBackgroundImage:[UIImage imageNamed:@"intelligence_purify_bt"] forState:UIControlStateNormal];
+                [_modeButton setTitle:@"智能模式" forState:UIControlStateNormal];
+                break;
+                
+            case 1:
+                [_modeButton setBackgroundImage:[UIImage imageNamed:@"purify_bt"] forState:UIControlStateNormal];
+                [_modeButton setTitle:@"手动模式" forState:UIControlStateNormal];
+                break;
+                
+            case 2:
+                [_modeButton setBackgroundImage:[UIImage imageNamed:@"sleep_purify_bt"] forState:UIControlStateNormal];
+                [_modeButton setTitle:@"睡眠模式" forState:UIControlStateNormal];
+                break;
+                
+            default:
+                break;
+        }
+    }
+}
+
 - (void)onStoreButtonPress
 {}
 
 - (void)onShareButtonPress
-{}
+{
+    
+    id<ISSContent> publishContent = [ShareSDK content:@""
+                                       defaultContent:@""
+                                                image:nil
+                                                title:@"分享"
+                                                  url:@"http://www.baidu.com"
+                                          description:@""
+                                            mediaType:SSPublishContentMediaTypeNews];
+ 
+    
+    NSArray *shareList = [ShareSDK customShareListWithType:SHARE_TYPE_NUMBER(ShareTypeSinaWeibo),SHARE_TYPE_NUMBER(ShareTypeWeixiTimeline),SHARE_TYPE_NUMBER(ShareTypeWeixiSession),SHARE_TYPE_NUMBER(ShareTypeQQ),  nil];
+    
+    [ShareSDK showShareActionSheet:nil
+                         shareList:shareList
+                           content:publishContent
+                     statusBarTips:YES
+                       authOptions:nil
+                      shareOptions: [ShareSDK defaultShareOptionsWithTitle:nil
+                                                           oneKeyShareList:[NSArray defaultOneKeyShareList]
+                                                            qqButtonHidden:NO
+                                                     wxSessionButtonHidden:NO
+                                                    wxTimelineButtonHidden:NO
+                                                      showKeyboardOnAppear:NO
+                                                         shareViewDelegate:nil
+                                                       friendsViewDelegate:nil
+                                                     picViewerViewDelegate:nil]
+                            result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
+                                
+                            }];
+}
 
 static CGFloat const kContentHeigt = 336.0;
 static CGFloat const kContentMargin = 15.0;
@@ -521,7 +600,8 @@ static CGFloat const kContentMargin = 15.0;
         NSString *AQI  = [self readDataPoint:IoTDeviceAlertAirQuality data:_data];
         iFilter_Life = [[self readDataPoint:IoTDeviceAlertFilterLife data:_data] integerValue];
         Air_Volume = [[self readDataPoint:IoTDeviceWriteWindVelocity  data:_data] integerValue];
-       
+        _mode = [[self readDataPoint:IoTDevice_model  data:_data] integerValue ];
+        [self setUpModeButton];
          self.view.userInteractionEnabled = bSwitch;
         
         NSInteger airVolume = [[self readDataPoint:IoTDeviceWriteWindVelocity data:_data] integerValue];

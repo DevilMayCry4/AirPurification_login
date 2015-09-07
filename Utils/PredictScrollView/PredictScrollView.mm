@@ -198,7 +198,7 @@
     
     CGRect frame = _pageCtrl.frame;
     frame.origin.x = (CGRectGetWidth(self.frame) - frame.size.width)/2;
-    frame.origin.y = CGRectGetMaxY(self.frame) - 40;
+    frame.origin.y =  450;
 	_pageCtrl.frame = frame;
 }
 //

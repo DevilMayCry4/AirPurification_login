@@ -8,41 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "IoTMainController.h"
-//typedef enum
-//{
-//    // writable
-//    IoTDeviceWriteUpdateData = 0,           //更新数据
-//    IoTDeviceWriteOnOff,                    //开关
-//    IoTDeviceWriteSwitchPlasma,             //等离子开关
-//    IoTDeviceWriteChildSecurityLock,        //儿童锁
-//    IoTDeviceWriteLEDAirQuality,            //空气指令指示灯
-//    IoTDeviceWriteCountDownOnMin,           //倒计时开机
-//    IoTDeviceWriteCountDownOffMin,          //倒计时关机
-//    IoTDeviceWriteWindVelocity,             //风速
-//    IoTDeviceWriteQuality,                  //空气质量
-//    IoTDeviceWriteAirSensitivity,           //灵敏度
-//    IoTDeviceWriteFilterLife,               //滤网寿命
-//    
-//    // alert
-//    IoTDeviceAlertDust,                     //空气质量_粉尘
-//    IoTDeviceAlertPeculiar,                 //空气质量_异味
-//    IoTDeviceAlertFilterLife,               //滤芯寿命报警
-//    IoTDeviceAlertAirQuality,               //空气质量警报
-//    
-//    // fault
-//    IoTDeviceFaultMotor,                    //电机故障
-//    IoTDeviceFaultAir,                      //空气传感器故障
-//    IoTDeviceFaultDust,                     //灰尘传感器故障
-//    
-//}IoTDeviceDataPoint;
 
-//typedef enum
-//{
-//    IoTDeviceCommandWrite    = 1,//写
-//    IoTDeviceCommandRead     = 2,//读
-//    IoTDeviceCommandResponse = 3,//读响应
-//    IoTDeviceCommandNotify   = 4,//通知
-//}IoTDeviceCommand;
 
 #define DATA_CMD                        @"cmd"                  //命令
 #define Data_Switch @"ON_OFF"

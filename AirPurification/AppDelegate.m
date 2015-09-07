@@ -27,6 +27,11 @@
 #import "IoTMainMenu.h"
 #import "IoTAlertView.h"
 #import "AirPurificationController.h"
+#import <ShareSDK/ShareSDK.h>
+#import "WXApi.h"
+#import <TencentOpenAPI/QQApiInterface.h>
+#import <TencentOpenAPI/TencentOAuth.h>
+
 
 // App ID 和 Product Key
 
@@ -54,6 +59,10 @@ static NSString * const IOT_APPKEY = @"8ef82db25175422f8586f08c1c7499ec";
 #else
     NSString * const file       = @"data1";
 #endif
+    
+    [ShareSDK registerApp:@"34cae8277908"];
+    [self initShare];
+    
     NSData *data = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:file ofType:@"json"]];
    
     model = [IoTProcessModel startWithAppID:IOT_APPKEY product:IOT_PRODUCT productJson:data];
@@ -88,6 +97,39 @@ static NSString * const IOT_APPKEY = @"8ef82db25175422f8586f08c1c7499ec";
     return YES;
 }
 
+
+- (void)initShare
+{
+    [ShareSDK connectWeChatWithAppId:@"wx8a01ed671da498a9"
+                           appSecret:@"658ab975f714e761d5d98c61f57f02b1"
+                           wechatCls:[WXApi class]];
+    
+    [ShareSDK connectSinaWeiboWithAppKey:@"2695856179" appSecret:@"dffce37d091499dc777f295f104be94a" redirectUri:@"http://www.bjqfkh.com/"];
+    
+    [ShareSDK connectQQWithQZoneAppKey:@"100371282"
+                     qqApiInterfaceCls:[QQApiInterface class]
+                       tencentOAuthCls:[TencentOAuth class]];
+    
+  
+}
+
+- (BOOL)application:(UIApplication *)application
+      handleOpenURL:(NSURL *)url
+{
+    return [ShareSDK handleOpenURL:url
+                        wxDelegate:self];
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation
+{
+    return [ShareSDK handleOpenURL:url
+                 sourceApplication:sourceApplication
+                        annotation:annotation
+                        wxDelegate:self];
+}
 
 #pragma mark - call tel 10086
 - (void)callServices
