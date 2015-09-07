@@ -55,7 +55,7 @@
 #define Data_AQI @"AQI"
 
 
-#define DebugAir  1
+#define DebugAir  0
 
 @protocol PredictScrollViewDelegate;
 

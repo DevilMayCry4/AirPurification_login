@@ -187,11 +187,11 @@ static CGFloat const kContentMargin = 15.0;
             CGFloat const kPMImageWidth = 20.0;
             CGFloat const kPMImageY = 40.0 + CGRectGetMaxY(_statusLabel.frame);
             _pm25ImageView = [[UIImageView alloc] initWithFrame:CGRectMake((kContentWidth - kPMImageWidth)/2, kPMImageY, kPMImageWidth, kPMImageWidth)];
-            _pm25ImageView.backgroundColor = [UIColor redColor];
+            _pm25ImageView.image = [UIImage imageNamed:@"home_arrow_up"];
             [contentView addSubview:_pm25ImageView];
             
             _pm10ImageView = [[UIImageView alloc] initWithFrame:CGRectMake((kContentWidth - kPMImageWidth)/2, CGRectGetMaxY(_pm25ImageView.frame) + 5, kPMImageWidth, kPMImageWidth)];
-            _pm10ImageView.backgroundColor = [UIColor blueColor];
+            _pm10ImageView.image = [UIImage imageNamed:@"home_arrow_down"];
             [contentView addSubview:_pm10ImageView];
             
             CGFloat const kPadding = 10;
